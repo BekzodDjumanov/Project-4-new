@@ -39,6 +39,20 @@ public class Enemy extends Polygon implements Collidable {
 
     brush.setColor(new Color(80, 0, 0));
     brush.drawPolygon(xPoints, yPoints, points.length);
+
+    int cx = 0;
+    int cy = 0;
+    for (int i = 0; i < points.length; i++) {
+      cx += xPoints[i];
+      cy += yPoints[i];
+    }
+    cx /= points.length;
+    cy /= points.length;
+
+    brush.setColor(new Color(100, 0, 0));
+    brush.fillOval(cx - 8, cy - 8, 16, 16);
+    brush.setColor(new Color(60, 0, 0));
+    brush.drawOval(cx - 8, cy - 8, 16, 16);
   }
 
   /**

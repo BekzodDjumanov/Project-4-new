@@ -73,28 +73,8 @@ public class Tank extends Polygon implements KeyListener, Collidable {
     brush.setColor(new Color(0, 80, 0));
     brush.drawPolygon(xPoints, yPoints, points.length);
 
-    /* turret (uses cx and cy respectively for aligning turret in the middle) */
-    cx = 0;
-    cy = 0;
-    for (int i = 0; i < points.length; i++) {
-      cx += xPoints[i];
-      cy += yPoints[i];
-    }
-    cx /= points.length;
-    cy /= points.length;
-
-    /* all ux components */
-    brush.setColor(new Color(20, 100, 20));
-    brush.fillOval(cx - 8, cy - 8, 16, 16);
-    brush.setColor(new Color(0, 60, 0));
-    brush.drawOval(cx - 8, cy - 8, 16, 16);
-
-    /* for aligning the turret and such */
-    int barrelEndX = (int) (cx + 20 * Math.cos(Math.toRadians(rotation)));
-    int barrelEndY = (int) (cy + 20 * Math.sin(Math.toRadians(rotation)));
-    brush.setColor(new Color(0, 60, 0));
-    // draw turret
-    brush.drawLine(cx, cy, barrelEndX, barrelEndY);
+    cx = (int) position.x + 20;
+    cy = (int) position.y + 12;
   }
 
   /**

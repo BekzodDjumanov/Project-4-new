@@ -80,18 +80,14 @@ class TankGame extends Game {
   class ScoreTracker {
 
     private int score = 0;
+
     /* score needed to win */
-    private final int winScore = 5;
 
     /**
      * Method for adding points to score
      */
     public void addPoint() {
       score++;
-      if (score >= winScore) {
-        /* new flag to show "You Win" */
-        gameWin = true;
-      }
     }
 
     /**
@@ -133,28 +129,14 @@ class TankGame extends Game {
     enemies.add(
       new Enemy(
         tankShape,
-        new Point((Math.random() * 750), (Math.random() * 600) + 1),
+        new Point((Math.random() * 750) + 1, (Math.random() * 600) + 1),
         180
       )
     );
     enemies.add(
       new Enemy(
         tankShape,
-        new Point((Math.random() * 750), (Math.random() * 600) + 1),
-        90
-      )
-    );
-    enemies.add(
-      new Enemy(
-        tankShape,
-        new Point((Math.random() * 750), (Math.random() * 600) + 1),
-        90
-      )
-    );
-    enemies.add(
-      new Enemy(
-        tankShape,
-        new Point((Math.random() * 750), (Math.random() * 600) + 1),
+        new Point((Math.random() * 750) + 1, (Math.random() * 600) + 1),
         90
       )
     );
@@ -249,6 +231,13 @@ class TankGame extends Game {
     tank.move();
     tank.paint(brush);
 
+    /* collides interface */
+    for (Enemy e : enemies) {
+      if (e.isActive() && tank.collides(e)) {
+        gameOver = true;
+      }
+    }
+
     /* render bullets */
     for (Bullet b : tank.bullets) {
       b.paint(brush);
@@ -299,10 +288,6 @@ class TankGame extends Game {
           explosions.remove(i);
         }
       }
-      /* collides interface */
-      if (tank.collides(e)) {
-        gameOver = true;
-      }
 
       /* remove inactive bullets */
       tank.bullets.removeIf(b -> !b.isActive()); // #1 lambda
@@ -315,6 +300,9 @@ class TankGame extends Game {
       brush.setFont(new Font("Arial", Font.BOLD, 48));
       brush.drawString("GAME OVER", width / 2 - 150, height / 2);
       return; // stop drawing anything else
+    }
+    if (tracker.getScore() >= 3) {
+      gameWin = true;
     }
   }
 
