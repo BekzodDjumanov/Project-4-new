@@ -10,27 +10,26 @@ import java.util.ArrayList;
 class TankGame extends Game {
 
   // contains all enemies that are supposed to be generated
-  ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+  private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
-  // contains all explosion that are supposed to be carried out, implementation of Explosion is in inner class 
-  ArrayList<Explosion> explosions = new ArrayList<>();
+  // contains all explosion that are supposed to be carried out, implementation of Explosion is in inner class
+  private ArrayList<Explosion> explosions = new ArrayList<>();
 
-  boolean gameOver = false;
-  boolean gameWin = false;
+  private boolean gameOver = false;
+  private boolean gameWin = false;
+  private boolean paused = false;
 
-
-  // Implementation inside scoreTracker inner class 
+  // Implementation inside scoreTracker inner class
   ScoreTracker tracker = new ScoreTracker();
-  boolean paused = false;
 
-  // #1 inner class 
+  // #1 inner class
   class Explosion {
 
-    Point position;
-    int radius = 0;
+    private Point position;
+    private int radius = 0;
 
-    // frames until it disappears (explosion) 
-    int lifetime = 15;
+    // frames until it disappears (explosion)
+    private int lifetime = 15;
 
     /**
      * Constructor for explosion
@@ -45,7 +44,7 @@ class TankGame extends Game {
     /**
      * Method for updating the radius and life span of explosion
      */
-    void update() {
+    public void update() {
       /* circle grows */
       radius += 3;
       /* time reduces */
@@ -57,7 +56,7 @@ class TankGame extends Game {
      *
      * @return returns true if is still active, false otherwise
      */
-    boolean isActive() {
+    public boolean isActive() {
       return lifetime > 0;
     }
 
@@ -67,7 +66,7 @@ class TankGame extends Game {
      * @param brush Graphics object
      */
     // draw explostion using its position (cloned) and decrease radius
-    void paint(Graphics brush) {
+    public void paint(Graphics brush) {
       brush.setColor(Color.orange);
       brush.fillOval(
         (int) (position.x - radius),
@@ -78,7 +77,7 @@ class TankGame extends Game {
     }
   }
 
-  // #2 inner class for score 
+  // #2 inner class for score
   class ScoreTracker {
 
     private int score = 0;
@@ -118,7 +117,7 @@ class TankGame extends Game {
     this.requestFocus();
     addKeyListener(tank);
 
-    // all three enemy tanks instantiated 
+    // all three enemy tanks instantiated
     enemies.add(
       new Enemy(
         tankShape,
