@@ -1,10 +1,10 @@
 /**
  * INTERFACE: Collidable
- * DESCRIPTION: Represents the Collidable interface, defines methods for collision detection and active state checking.
+ * DESCRIPTION: Represents the Collidable interface, defines methods for collision detection and checking whether the state is active or not.
  */
 interface Collidable {
   /**
-   * Checks if the object is still active / rendered.
+   * Checks if the object is still active or not.
    *
    * @return true if active, false otherwise
    */

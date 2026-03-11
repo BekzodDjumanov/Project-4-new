@@ -2,7 +2,7 @@ import java.awt.*;
 
 /**
  * CLASS: Enemy
- * DESCRIPTION: Represents the Enemy class where enemy tanks are drawn and operated, defining collisions
+ * DESCRIPTION: Represents the Enemy class where enemy tanks are drawn and operated, using the collision interface
  * and serving as the main plot of the game
  */
 public class Enemy extends Polygon implements Collidable {
@@ -14,14 +14,14 @@ public class Enemy extends Polygon implements Collidable {
    *
    * @param shape the points defining the tanks shape
    * @param position the starting position of the tank
-   * @param rotation the initial rotation angle in degrees
+   * @param rotation the initial direction of the tank
    */
   public Enemy(Point[] shape, Point position, double rotation) {
     super(shape, position, rotation);
   }
 
   /**
-   * Draws the enemy tank, including its body, outline, and turret
+   * Draws the enemy tank
    *
    * @param brush the Graphics object used for drawing
    */
@@ -34,15 +34,15 @@ public class Enemy extends Polygon implements Collidable {
       yPoints[i] = (int) points[i].y;
     }
 
-    brush.setColor(new Color(139, 0, 0));
+    brush.setColor(Color.RED);
     brush.fillPolygon(xPoints, yPoints, points.length);
 
-    brush.setColor(new Color(80, 0, 0));
+    brush.setColor(Color.BLACK);
     brush.drawPolygon(xPoints, yPoints, points.length);
   }
 
   /**
-   * Returns whether the enemy tank is still active (rendered)
+   * Returns whether the enemy tank is still active or not
    *
    * @return true if active, false if not
    */
@@ -61,13 +61,15 @@ public class Enemy extends Polygon implements Collidable {
   public boolean collides(Polygon other) {
     Point[] otherPoints = other.getPoints();
     for (Point p : otherPoints) {
-      if (this.contains(p)) return true;
+      if (this.contains(p)) {
+        return true;
+        }
     }
     return false;
   }
 
   /**
-   * Destroys the enemy tank by marking it as inactive.
+   * Destroys the enemy tank by changing it to inactive.
    */
   public void destroy() {
     active = false;
