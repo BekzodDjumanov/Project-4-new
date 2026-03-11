@@ -9,25 +9,27 @@ import java.util.ArrayList;
  */
 class TankGame extends Game {
 
-  ArrayList<Enemy> enemies = new ArrayList<>();
+  // contains all enemies that are supposed to be generated
+  ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
-  /* inside explosion inner class */
+  // contains all explosion that are supposed to be carried out, implementation of Explosion is in inner class 
   ArrayList<Explosion> explosions = new ArrayList<>();
 
-  /* booleans for game over and game win */
   boolean gameOver = false;
   boolean gameWin = false;
 
-  /* inside scoreTracker inner class */
+
+  // Implementation inside scoreTracker inner class 
   ScoreTracker tracker = new ScoreTracker();
   boolean paused = false;
 
-  /* #1 inner class */
+  // #1 inner class 
   class Explosion {
 
     Point position;
     int radius = 0;
-    /* frames until it disappears (explosion) */
+
+    // frames until it disappears (explosion) 
     int lifetime = 15;
 
     /**
@@ -76,12 +78,10 @@ class TankGame extends Game {
     }
   }
 
-  /* #2 inner class for score */
+  // #2 inner class for score 
   class ScoreTracker {
 
     private int score = 0;
-
-    /* score needed to win */
 
     /**
      * Method for adding points to score
@@ -113,12 +113,12 @@ class TankGame extends Game {
    * Constructor for TankGame class, adds enemies, draws tank, and manages control movements
    */
   public TankGame() {
-    super("Tank Battle", 800, 600);
+    super("Tank Battle!", 800, 600);
     this.setFocusable(true);
     this.requestFocus();
     addKeyListener(tank);
 
-    /* all three enemy tanks instantiated */
+    // all three enemy tanks instantiated 
     enemies.add(
       new Enemy(
         tankShape,
@@ -129,14 +129,14 @@ class TankGame extends Game {
     enemies.add(
       new Enemy(
         tankShape,
-        new Point((Math.random() * 750) + 1, (Math.random() * 600) + 1),
+        new Point((Math.random() * 550) + 1, (Math.random() * 600) + 1),
         180
       )
     );
     enemies.add(
       new Enemy(
         tankShape,
-        new Point((Math.random() * 750) + 1, (Math.random() * 600) + 1),
+        new Point((Math.random() * 550) + 1, (Math.random() * 600) + 1),
         90
       )
     );
@@ -188,9 +188,9 @@ class TankGame extends Game {
         i = 0;
       }
       if (count % 2 == 0) {
-        brush.setColor(new Color(85, 107, 47));
+        brush.setColor(Color.BLACK);
       } else {
-        brush.setColor(new Color(60, 80, 30));
+        brush.setColor(Color.darkGray);
       }
       brush.fillRect(i, y, 50, 50);
       count++;
@@ -206,7 +206,7 @@ class TankGame extends Game {
     brush.drawString("P to pause", 10, 80);
     brush.drawString("Dont hit the tanks!", 10, 100);
 
-    /* flag for paused */
+    /* paint for paused */
     if (paused) {
       brush.setColor(Color.black);
       brush.fillRect(0, 0, width, height);
@@ -217,7 +217,7 @@ class TankGame extends Game {
       return;
     }
 
-    /* flag for gameWin */
+    /* paint for gameWin */
     if (gameWin) {
       brush.setColor(Color.black);
       brush.fillRect(0, 0, width, height);
