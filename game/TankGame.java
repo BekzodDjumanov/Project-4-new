@@ -121,21 +121,21 @@ class TankGame extends Game {
     enemies.add(
       new Enemy(
         tankShape,
-        new Point((Math.random() * 550) + 1, (Math.random() * 600) + 1),
+        new Point((Math.random() * 500) + 1, (Math.random() * 500) + 1),
         0
       )
     );
     enemies.add(
       new Enemy(
         tankShape,
-        new Point((Math.random() * 550) + 1, (Math.random() * 600) + 1),
+        new Point((Math.random() * 500) + 1, (Math.random() * 500) + 1),
         180
       )
     );
     enemies.add(
       new Enemy(
         tankShape,
-        new Point((Math.random() * 550) + 1, (Math.random() * 600) + 1),
+        new Point((Math.random() * 500) + 1, (Math.random() * 500) + 1),
         90
       )
     );
